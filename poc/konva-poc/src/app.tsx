@@ -1,7 +1,8 @@
 import {Switch} from '@blueprintjs/core';
 import * as React from 'react';
-import {Layer, Stage} from "react-konva";
-import ColoredRect from './ColoredRect';
+import {Group, Layer, Stage} from "react-konva";
+import ColoredRect from './colored-rect';
+import Handler from "./handler";
 import styled from './styled-components';
 
 interface IStageEvent {
@@ -39,6 +40,9 @@ const SwitchLabel = styled.span`
     font-size: ${props => props.theme.textLarge}em;
 `;
 
+const getRandomInt = (max:  number) => {
+    return Math.floor(Math.random() * Math.floor(max));
+};
 
 class App extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -52,6 +56,7 @@ class App extends React.Component<IProps, IState> {
 
     public render() {
         const {isDrawingMode, shapes} = this.state;
+        const rectName = `rect${getRandomInt(1000)}`;
         return (
             <Container className="bp3-dark">
                 <Switch checked={isDrawingMode}
@@ -63,14 +68,18 @@ class App extends React.Component<IProps, IState> {
                        onContentMouseMove={this.handleMouseMove}>
                     <Layer>
                         {shapes.map(shape =>
-                            <ColoredRect
-                                key={`${shape.x}.${shape.y}.${shape.width}.${shape.height}`}
-                                x={shape.x}
-                                y={shape.y}
-                                width={shape.width}
-                                height={shape.height}
-                                isDrawingMode={isDrawingMode}
-                            />
+                            <Group
+                                key={`${shape.x}.${shape.y}.${shape.width}.${shape.height}`}>
+                                <ColoredRect
+                                    name={rectName}
+                                    x={shape.x}
+                                    y={shape.y}
+                                    width={shape.width}
+                                    height={shape.height}
+                                    isDrawingMode={isDrawingMode}
+                                />
+                                <Handler targetName={rectName}/>
+                            </Group>
                         )}
                     </Layer>
                 </Stage>

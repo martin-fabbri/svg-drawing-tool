@@ -1,6 +1,6 @@
 import * as Konva from "konva";
 import * as React from "react";
-import {Group, Rect} from "react-konva";
+import { Rect } from "react-konva";
 
 interface IProps {
     x: number;
@@ -8,6 +8,7 @@ interface IProps {
     width: number;
     height: number;
     isDrawingMode: boolean;
+    name: string;
 }
 
 interface IState {
@@ -23,19 +24,20 @@ class ColoredRect extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { x, y , width, height } = this.props;
+        const { name, x, y , width, height } = this.props;
         const { color } = this.state;
         return (
-            <Group>
-                <Rect
-                    x={x}
-                    y={y}
-                    width={width}
-                    height={height}
-                    fill={color}
-                    onClick={this.handleClick}
-                />
-            </Group>
+            <Rect
+                name={name}
+                x={x}
+                y={y}
+                width={width}
+                height={height}
+                fill={color}
+                draggable={true}
+                onClick={this.handleClick}
+                onTransform={this.handleTransform}
+            />
         );
     }
 
@@ -46,6 +48,10 @@ class ColoredRect extends React.Component<IProps, IState> {
                 color: Konva.Util.getRandomColor(),
             });
         }
+    };
+
+    private handleTransform = () => {
+        console.log('transformed');
     };
 }
 
