@@ -1,5 +1,5 @@
 {
-  "name": "svg-drawing-tool",
+  "name": "context-poc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

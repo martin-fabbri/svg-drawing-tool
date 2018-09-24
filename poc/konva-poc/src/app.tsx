@@ -1,6 +1,6 @@
 import {Switch} from '@blueprintjs/core';
 import * as React from 'react';
-import {Group, Layer, Stage} from "react-konva";
+import {Group, Layer, Stage, Text} from "react-konva";
 import ColoredRect from './colored-rect';
 import Handler from "./handler";
 import styled from './styled-components';
@@ -79,6 +79,7 @@ class App extends React.Component<IProps, IState> {
                                     isDrawingMode={isDrawingMode}
                                 />
                                 <Handler targetName={rectName}/>
+                                <Text x={10} y={10} text='Label'/>
                             </Group>
                         )}
                     </Layer>
