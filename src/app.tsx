@@ -8,9 +8,10 @@ const Container = styled.div`
     
     display: grid;
     grid-template-areas:
-            'stage toolbar';
-    grid-gap: 0;
-    grid-template-columns: 75% auto;
+            'toolbar'
+            'stage';
+    grid-gap: 2px;
+    grid-template-columns: 50px auto;
     justify-items: stretch;
     
     // full height
@@ -33,10 +34,25 @@ class App extends React.Component {
   public render() {
     return (
       <Container>
-          <StageArea>a</StageArea>
           <ToolbarArea>
-            <Toolbar />
+              <Toolbar />
           </ToolbarArea>
+          <StageArea>
+              <div className="bp3-button-group bp3-dark">
+                  <a className="bp3-button bp3-icon-chart" role="button"/>
+                  <a className="bp3-button bp3-icon-control" role="button"/>
+                  <a className="bp3-button bp3-icon-graph" role="button"/>
+                  <a className="bp3-button bp3-icon-camera" role="button"/>
+                  <a className="bp3-button bp3-icon-map" role="button"/>
+              </div>
+              <div className="bp3-button-group">
+                  <a className="bp3-button bp3-icon-chart" role="button"/>
+                  <a className="bp3-button bp3-icon-control" role="button"/>
+                  <a className="bp3-button bp3-icon-graph" role="button"/>
+                  <a className="bp3-button bp3-icon-camera" role="button"/>
+                  <a className="bp3-button bp3-icon-map" role="button"/>
+              </div>
+          </StageArea>
       </Container>
     );
   }
