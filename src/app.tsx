@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from './styled-components';
+import Toolbar from './toolbar';
 
 const Container = styled.div`
     width: 100%;
@@ -7,24 +8,35 @@ const Container = styled.div`
     
     display: grid;
     grid-template-areas:
-            'header header'
-            'stage toolbar'
-            'footer footer';
+            'stage toolbar';
     grid-gap: 0;
-    grid-template-columns: 25px auto;
-    grid-template-rows: auto 25px;
+    grid-template-columns: 75% auto;
     justify-items: stretch;
     
     // full height
     height: 100%;
 `;
 
+const StageArea = styled.div`
+    grid-area: stage;
+    width: 100%;
+    height: 100%;
+`;
+
+const ToolbarArea = styled.div`
+    grid-area: toolbar;
+    width: 100%;
+    height: 100%;
+`;
 
 class App extends React.Component {
   public render() {
     return (
       <Container>
-        Test
+          <StageArea>a</StageArea>
+          <ToolbarArea>
+            <Toolbar />
+          </ToolbarArea>
       </Container>
     );
   }

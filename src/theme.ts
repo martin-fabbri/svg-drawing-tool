@@ -6,7 +6,7 @@ export interface ITheme {
 }
 
 const theme: ITheme = {
-    backgroundColor: Colors.DARK_GRAY3,
+    backgroundColor: Colors.GRAY5, // Colors.DARK_GRAY3,
     textLarge: 1, // <em> units
 };
 
