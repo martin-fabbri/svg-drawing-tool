@@ -1,5 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 7.74 11.99">
-    <title>pointer 20</title><g id="Layer_2" data-name="Layer 2">
-    <g>
-        <path d="M0,0,1.26,9.59a.17.17,0,0,0,.31.08L3.78,6.55l3.81-.36a.17.17,0,0,0,.08-.3Z"/><path d="M7.39,11.13,5.94,12a.18.18,0,0,1-.23-.07L1,3.19l1.31-.76L7.45,10.9A.17.17,0,0,1,7.39,11.13Z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 16 16.000001"
+   version="1.1"
+   id="svg3880"
+   sodipodi:docname="pointer 20.svg"
+   width="16"
+   height="16"
+   inkscape:version="0.92.3 (d244b95, 2018-08-02)">
+  <metadata
+     id="metadata3886">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>pointer 20</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3884" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1055"
+     id="namedview3882"
+     showgrid="false"
+     inkscape:zoom="36.405338"
+     inkscape:cx="9.2835514"
+     inkscape:cy="7.6278429"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3880"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <title
+     id="title3871">pointer 20</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2"
+     transform="matrix(1.5646429,0,0,1.3314663,1.8403895,0)">
+    <g
+       id="g3877">
+      <path
+         d="M 0,0 1.26,9.59 A 0.17,0.17 0 0 0 1.57,9.67 L 3.78,6.55 7.59,6.19 a 0.17,0.17 0 0 0 0.08,-0.3 z"
+         id="path3873"
+         inkscape:connector-curvature="0" />
+      <path
+         d="M 7.39,11.13 5.94,12 A 0.18,0.18 0 0 1 5.71,11.93 L 1,3.19 2.31,2.43 7.45,10.9 a 0.17,0.17 0 0 1 -0.06,0.23 z"
+         id="path3875"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

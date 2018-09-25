@@ -1,1 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.33 8.5"><defs><style>.cls-1{fill:#fff;}</style></defs><title>square 20</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect class="cls-1" x="0.67" y="0.67" width="12" height="7.17"/><path d="M12,1.33V7.17H1.33V1.33H12M13.17,0H.17A.16.16,0,0,0,0,.17V8.33a.16.16,0,0,0,.17.17h13a.16.16,0,0,0,.16-.17V.17A.16.16,0,0,0,13.17,0Z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg110"
+   sodipodi:docname="square 20.svg"
+   width="16"
+   height="16"
+   inkscape:version="0.92.3 (d244b95, 2018-08-02)">
+  <metadata
+     id="metadata114">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>square 20</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1055"
+     id="namedview112"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="102.70588"
+     inkscape:cx="8.154561"
+     inkscape:cy="14.028951"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg110">
+    <inkscape:grid
+       type="xygrid"
+       id="grid134" />
+  </sodipodi:namedview>
+  <defs
+     id="defs100">
+    <style
+       id="style98">.cls-1{fill:#fff;}</style>
+  </defs>
+  <title
+     id="title102">square 20</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2"
+     transform="matrix(1.2002418,0,0,1.4117639,4.0097364e-4,2.0000066)">
+    <g
+       id="Layer_1-2"
+       data-name="Layer 1">
+      <rect
+         class="cls-1"
+         x="0.67000002"
+         y="0.67000002"
+         width="12"
+         height="7.1700001"
+         id="rect104"
+         style="fill:#ffffff" />
+      <path
+         d="M 12,1.33 V 7.17 H 1.33 V 1.33 H 12 M 13.17,0 h -13 A 0.16,0.16 0 0 0 0,0.17 V 8.33 A 0.16,0.16 0 0 0 0.17,8.5 h 13 A 0.16,0.16 0 0 0 13.33,8.33 V 0.17 A 0.16,0.16 0 0 0 13.17,0 Z"
+         id="path106"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>
