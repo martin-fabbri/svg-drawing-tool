@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from './styled-components';
 import Toolbar from './toolbar';
+import ToolbarTooltip, {Tooltips} from './toolbar-tooltip';
 
 const Container = styled.div`
     width: 100%;
@@ -38,20 +39,7 @@ class App extends React.Component {
               <Toolbar />
           </ToolbarArea>
           <StageArea>
-              <div className="bp3-button-group bp3-dark">
-                  <a className="bp3-button bp3-icon-chart" role="button"/>
-                  <a className="bp3-button bp3-icon-control" role="button"/>
-                  <a className="bp3-button bp3-icon-graph" role="button"/>
-                  <a className="bp3-button bp3-icon-camera" role="button"/>
-                  <a className="bp3-button bp3-icon-map" role="button"/>
-              </div>
-              <div className="bp3-button-group">
-                  <a className="bp3-button bp3-icon-chart" role="button"/>
-                  <a className="bp3-button bp3-icon-control" role="button"/>
-                  <a className="bp3-button bp3-icon-graph" role="button"/>
-                  <a className="bp3-button bp3-icon-camera" role="button"/>
-                  <a className="bp3-button bp3-icon-map" role="button"/>
-              </div>
+              <ToolbarTooltip id={Tooltips.select}/>
           </StageArea>
       </Container>
     );
