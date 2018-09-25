@@ -11,7 +11,7 @@ const Container = styled.div`
             'toolbar'
             'stage';
     grid-gap: 2px;
-    grid-template-columns: 50px auto;
+    grid-template-rows: 50px auto;
     justify-items: stretch;
     
     // full height
