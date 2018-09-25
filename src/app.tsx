@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from './styled-components';
 import Toolbar from './toolbar';
-import ToolbarTooltip, {Tooltips} from './toolbar-tooltip';
+import ToolbarTooltip from './toolbar-tooltip';
 
 const Container = styled.div`
     width: 100%;
@@ -39,7 +39,7 @@ class App extends React.Component {
               <Toolbar />
           </ToolbarArea>
           <StageArea>
-              <ToolbarTooltip id={Tooltips.select}/>
+              <ToolbarTooltip id='rectangle'/>
           </StageArea>
       </Container>
     );

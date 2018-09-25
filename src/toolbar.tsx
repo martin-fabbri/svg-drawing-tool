@@ -2,7 +2,7 @@ import {Alignment, Button, ButtonGroup, Navbar, NavbarGroup, Position, Tooltip} 
 import * as React from 'react';
 import styled, {css} from './styled-components';
 import FjIcon from './toolbar-icons';
-import ToolbarTooltip, {Tooltips} from './toolbar-tooltip';
+import ToolbarTooltip from './toolbar-tooltip';
 
 const Container = styled(Navbar)`
     background-color: #293742 !important;
@@ -30,20 +30,36 @@ class Toolbar extends React.Component {
             <Container className='bp3-dark'>
                 <ToolbarGroup align={Alignment.LEFT}>
                     <ButtonGroup className='bp3-dark'>
-                        <Tooltip content={<ToolbarTooltip id={Tooltips.select}/>} position={Position.BOTTOM_LEFT} >
+                        <Tooltip content={<ToolbarTooltip id='select'/>} position={Position.BOTTOM_LEFT} >
                             <ToolbarButton icon={FjIcon.pointerIcon} active={true}/>
                         </Tooltip>
                     </ButtonGroup>
                     <Navbar.Divider />
                     <ButtonGroup className='bp3-dark'>
-                        <ToolbarButton icon={FjIcon.squareIcon} />
-                        <ToolbarButton icon={FjIcon.quadIcon} />
-                        <ToolbarButton icon={FjIcon.ellipseIcon} />
-                        <ToolbarButton icon={FjIcon.polyIcon} />
-                        <ToolbarButton icon="edit" />
-                        <ToolbarButton icon={FjIcon.autoGateIcon} />
-                        <ToolbarButton icon={FjIcon.curlyGateIcon} />
-                        <ToolbarButton icon={FjIcon.spiderGateIcon} />
+                        <Tooltip content={<ToolbarTooltip id='rectangle'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.squareIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='quad'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.quadIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='ellipse'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.ellipseIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='polygon'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.polyIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='pencil'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon="edit" />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='auto'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.autoGateIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='curly'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.curlyGateIcon} />
+                        </Tooltip>
+                        <Tooltip content={<ToolbarTooltip id='curly'/>} position={Position.BOTTOM_LEFT} >
+                            <ToolbarButton icon={FjIcon.spiderGateIcon} />
+                        </Tooltip>
                     </ButtonGroup>
                 </ToolbarGroup>
             </Container>
