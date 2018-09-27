@@ -55,6 +55,11 @@ export const reducer = (state = initialState, action: fromActions.ActionsType): 
                   }
               }
           };
+      case fromActions.SET_ACTIVE_TOOL:
+          return {
+              ...state,
+              activeTool: action.payload,
+          };
       default:
           return state;
   }

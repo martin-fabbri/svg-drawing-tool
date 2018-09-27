@@ -2,6 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import Toolbar from './graph-panel/components/toolbar';
 import {GraphPanelTools} from "./graph-panel/constants";
+import {actions} from './graph-panel/duck/actions'
 import {GraphPanelState} from "./graph-panel/duck/reducers";
 import {IAppState} from "./store";
 import styled from './styled-components';
@@ -36,6 +37,7 @@ const ToolbarArea = styled.div`
 
 interface IProps {
     graphPanel: GraphPanelState;
+    setActiveTool: typeof actions.setActiveTool,
 }
 
 interface IState {
@@ -51,6 +53,9 @@ class App extends React.Component<IProps, IState> {
     }
 
     public render() {
+        // tslint:disable-next-line
+        console.log('Rendering: GraphPanel');
+
         const { activeTool } = this.props.graphPanel;
 
         return (
@@ -68,6 +73,8 @@ class App extends React.Component<IProps, IState> {
     private handleToolSelection = (selectedTool: GraphPanelTools) => {
         // tslint:disable-next-line
         console.log(`${selectedTool} tool was selected`);
+        const {setActiveTool} = this.props;
+        setActiveTool(selectedTool);
     }
 }
 
@@ -75,4 +82,8 @@ const mapStateToProps = (state: IAppState) => {
     return { graphPanel: state.graphPanel };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+    setActiveTool: actions.setActiveTool,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -43,34 +43,33 @@ class Toolbar extends React.PureComponent<IProps> {
                                        active={activeTool === GraphPanelTools.Rectangle}
                                        handleToolSelection={handleToolSelection}/>
 
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Quad}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.quadIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Quad}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Ellipse}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.ellipseIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Ellipse}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Polygon}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.polyIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Polygon}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Pencil}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon="edit"*/}
-                                           {/*active={activeTool === GraphPanelTools.Pencil}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Auto}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.autoGateIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Auto}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Curly}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.curlyGateIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Curly}/>*/}
-                        {/*</Tooltip>*/}
-                        {/*<Tooltip content={<ToolbarTooltip id={GraphPanelTools.Spider}/>} position={Position.BOTTOM_LEFT} >*/}
-                            {/*<ToolbarButton icon={FjIcon.spiderGateIcon}*/}
-                                           {/*active={activeTool === GraphPanelTools.Spider}/>*/}
-                        {/*</Tooltip>*/}
+                        <ToolbarOption id={GraphPanelTools.Quad}
+                                       active={activeTool === GraphPanelTools.Quad}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Ellipse}
+                                       active={activeTool === GraphPanelTools.Ellipse}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Polygon}
+                                       active={activeTool === GraphPanelTools.Polygon}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Pencil}
+                                       active={activeTool === GraphPanelTools.Pencil}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Auto}
+                                       active={activeTool === GraphPanelTools.Auto}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Curly}
+                                       active={activeTool === GraphPanelTools.Curly}
+                                       handleToolSelection={handleToolSelection}/>
+
+                        <ToolbarOption id={GraphPanelTools.Spider}
+                                       active={activeTool === GraphPanelTools.Spider}
+                                       handleToolSelection={handleToolSelection}/>
                     </ButtonGroup>
                 </ToolbarGroup>
             </Container>
