@@ -21,12 +21,12 @@ const ToolbarGroup = styled(NavbarGroup)`
 
 interface IProps {
     activeTool: GraphPanelTools;
-    handleToolSelection: (selectedTool: GraphPanelTools) => void;
+    onToolSelected: (selectedTool: GraphPanelTools) => void;
 }
 
 class Toolbar extends React.PureComponent<IProps> {
     public render() {
-        const { activeTool, handleToolSelection } = this.props;
+        const { activeTool, onToolSelected } = this.props;
         // tslint:disable-next-line
         console.log('Rendering: Toolbar');
         return (
@@ -35,41 +35,41 @@ class Toolbar extends React.PureComponent<IProps> {
                     <ButtonGroup className='bp3-dark'>
                         <ToolbarOption id={GraphPanelTools.Selection}
                                        active={activeTool === GraphPanelTools.Selection}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
                     </ButtonGroup>
                     <Navbar.Divider />
                     <ButtonGroup className='bp3-dark'>
                         <ToolbarOption id={GraphPanelTools.Rectangle}
                                        active={activeTool === GraphPanelTools.Rectangle}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Quad}
                                        active={activeTool === GraphPanelTools.Quad}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Ellipse}
                                        active={activeTool === GraphPanelTools.Ellipse}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Polygon}
                                        active={activeTool === GraphPanelTools.Polygon}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Pencil}
                                        active={activeTool === GraphPanelTools.Pencil}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Auto}
                                        active={activeTool === GraphPanelTools.Auto}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Curly}
                                        active={activeTool === GraphPanelTools.Curly}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
 
                         <ToolbarOption id={GraphPanelTools.Spider}
                                        active={activeTool === GraphPanelTools.Spider}
-                                       handleToolSelection={handleToolSelection}/>
+                                       handleToolSelection={onToolSelected}/>
                     </ButtonGroup>
                 </ToolbarGroup>
             </Container>
