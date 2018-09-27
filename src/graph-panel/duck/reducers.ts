@@ -1,7 +1,8 @@
-import {GraphPanelModes} from '../constants';
+import { GraphPanelModes, GraphPanelTools } from '../constants';
 import * as fromActions from './actions';
 
 export const initialState = {
+    activeTool: GraphPanelTools.Selection,
     isGatingActive: false,
     isGatingMode: false,
     modes: {

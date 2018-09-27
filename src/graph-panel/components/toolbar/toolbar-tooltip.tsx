@@ -1,6 +1,7 @@
 import {Icon} from "@blueprintjs/core";
 import * as React from 'react';
-import styled from './styled-components';
+import styled from '../../../styled-components';
+import {GraphPanelTools} from "../../constants";
 import FjIcon from './toolbar-icons';
 
 const Container = styled.div`
@@ -22,8 +23,6 @@ const TooltipText = styled.div`
     font-size: 11px;
     padding: 5px;
 `;
-
-type TooltipIds = 'auto' | 'curly' | 'ellipse' | 'select' | 'rectangle' | 'quad' | 'polygon' | 'pencil';
 
 const tooltipContent = {
     auto: {
@@ -61,7 +60,7 @@ const tooltipContent = {
         text: 'Rectangular gates are the most efficient to calculate, making this a primary tool for rough gating.',
         title: 'Rectangle',
     },
-    select: {
+    selection: {
         icon: FjIcon.pointerIcon,
         text: 'This is the tool to select objects.',
         title: 'Selection (Arrow)',
@@ -74,7 +73,7 @@ const tooltipContent = {
 };
 
 interface IProps {
-    id: TooltipIds;
+    id: GraphPanelTools;
 }
 
 const ToolbarTooltip = (props: IProps) => {

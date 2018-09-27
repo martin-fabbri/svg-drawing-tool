@@ -1,8 +1,11 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import Toolbar from './graph-panel/components/toolbar';
+import ToolbarTooltip from './graph-panel/components/toolbar/toolbar-tooltip';
+import {GraphPanelTools} from "./graph-panel/constants";
+import {GraphPanelState} from "./graph-panel/duck/reducers";
+import {IAppState} from "./store";
 import styled from './styled-components';
-import Toolbar from './toolbar';
-import ToolbarTooltip from './toolbar-tooltip';
-
 
 const Container = styled.div`
     width: 100%;
@@ -33,7 +36,7 @@ const ToolbarArea = styled.div`
 `;
 
 interface IProps {
-    debug?: boolean;
+    graphPanel: GraphPanelState;
 }
 
 interface IState {
@@ -49,17 +52,23 @@ class App extends React.Component<IProps, IState> {
     }
 
     public render() {
+        const { activeTool } = this.props.graphPanel;
+
         return (
             <Container>
                 <ToolbarArea>
-                    <Toolbar/>
+                    <Toolbar activeTool={activeTool}/>
                 </ToolbarArea>
                 <StageArea>
-                    <ToolbarTooltip id='rectangle'/>
+                    <ToolbarTooltip id={GraphPanelTools.Rectangle}/>
                 </StageArea>
             </Container>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (state: IAppState) => {
+    return { graphPanel: state.graphPanel };
+};
+
+export default connect(mapStateToProps)(App);
