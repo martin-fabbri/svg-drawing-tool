@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import Toolbar from './graph-panel/components/toolbar';
-import ToolbarTooltip from './graph-panel/components/toolbar/toolbar-tooltip';
 import {GraphPanelTools} from "./graph-panel/constants";
 import {GraphPanelState} from "./graph-panel/duck/reducers";
 import {IAppState} from "./store";
@@ -57,13 +56,18 @@ class App extends React.Component<IProps, IState> {
         return (
             <Container>
                 <ToolbarArea>
-                    <Toolbar activeTool={activeTool}/>
+                    <Toolbar activeTool={activeTool} handleToolSelection={this.handleToolSelection}/>
                 </ToolbarArea>
                 <StageArea>
-                    <ToolbarTooltip id={GraphPanelTools.Rectangle}/>
+                    <div>stage</div>
                 </StageArea>
             </Container>
         );
+    }
+
+    private handleToolSelection = (selectedTool: GraphPanelTools) => {
+        // tslint:disable-next-line
+        console.log(`${selectedTool} tool was selected`);
     }
 }
 
