@@ -49,7 +49,7 @@ class App extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             isDrawing: false,
-            isDrawingMode: false,
+            isGatingMode: false,
             shapes: [{x: 10, y: 10, height: 100, width: 100}],
         }
     }
@@ -91,7 +91,7 @@ class App extends React.Component<IProps, IState> {
     private handleDrawingModeChange = () => {
         this.setState({
             ...this.state,
-            isDrawingMode: !this.state.isDrawingMode,
+            isGatingMode: !this.state.isDrawingMode,
         });
     };
 
