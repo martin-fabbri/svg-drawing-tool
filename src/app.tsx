@@ -1,4 +1,5 @@
 import * as React from 'react';
+import GateLayer from "./graph-panel/components/gate-layer";
 import Toolbar from './graph-panel/components/toolbar';
 import {GraphPanelTools} from "./graph-panel/constants";
 import styled from './styled-components';
@@ -71,7 +72,7 @@ class App extends React.Component<IProps, IState> {
                     <Toolbar activeTool={activeTool} onToolSelected={this.handleToolSelection}/>
                 </ToolbarArea>
                 <StageArea>
-                    <div>stage</div>
+                    <GateLayer />
                 </StageArea>
             </Container>
         );
