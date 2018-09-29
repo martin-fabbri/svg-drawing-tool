@@ -1,11 +1,16 @@
+import {Button, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
+import * as Classes from "@blueprintjs/core/lib/esm/common/classes";
 import * as React from 'react';
 import { MouseEvent } from 'react';
+import styled from 'styled-components';
 
 interface IProps {
     debug?: boolean;
 }
 
 interface IGateShape {
+    originX: number;
+    originY: number;
     x: number;
     y: number;
     width: number;
@@ -16,16 +21,33 @@ interface IState {
     activeGate?: IGateShape;
     isGatingActive: boolean;
     gates: IGateShape[];
+    isGateCreationDialogOpen: boolean;
 }
 
 interface IDrawingGateProps {
     gate: IGateShape,
 }
 
+const GateRect = styled.rect`
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke: #30404D;
+    stroke-width: 1.5;
+    pointer-events: none;
+    fill: transparent;
+`;
+
+const SubPopulationFormGroup = styled(FormGroup)`
+    font-size: 14px !important;
+    > label {
+        font-size: 14px !important;
+    }
+`;
+
 function DrawingGate(props: IDrawingGateProps) {
     const {gate} = props;
     const {x, y , width, height} = gate;
-    return <rect x={x} y={y} width={width} height={height} />;
+    return <GateRect x={x} y={y} width={width} height={height} />;
 }
 
 interface IDrawingProps {
@@ -36,7 +58,7 @@ interface IDrawingProps {
 
 function Drawing(props: IDrawingProps) {
     const {gates, isGatingActive, activeGate} = props;
-    const allGates = gates;
+    const allGates = gates.slice();
 
     if (isGatingActive && activeGate) {
         allGates.push(activeGate);
@@ -58,6 +80,7 @@ class GateLayer extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             gates: [],
+            isGateCreationDialogOpen: false,
             isGatingActive: false,
         };
     }
@@ -65,16 +88,18 @@ class GateLayer extends React.Component<IProps, IState> {
     public render() {
         const {activeGate, isGatingActive, gates} = this.state;
         return (
-            <div
-                style={{width: '400px', height: '400px', border: '1px solid black'}}
-                ref={this.areaPlotRef}
-                onMouseDown={this.handleMouseDown}
-                onMouseMove={this.handleMouseMove}
-            >
-                <Drawing gates={gates}
-                         activeGate={activeGate}
-                         isGatingActive={isGatingActive}/>
-            </div>
+            <>
+                {this.gateCreationDialog()}
+                <div
+                    style={{width: '400px', height: '400px', border: '1px solid black'}}
+                    ref={this.areaPlotRef}
+                    onMouseDown={this.handleMouseDown}
+                    onMouseMove={this.handleMouseMove}>
+                    <Drawing gates={gates}
+                             activeGate={activeGate}
+                             isGatingActive={isGatingActive}/>
+                </div>
+            </>
         );
     }
 
@@ -113,7 +138,7 @@ class GateLayer extends React.Component<IProps, IState> {
 
         this.setState({
             ...this.state,
-            activeGate: {x, y, width: 0, height: 0},
+            activeGate: {x, y, width: 0, height: 0, originX: x, originY: y},
             isGatingActive: true,
         });
     };
@@ -133,21 +158,12 @@ class GateLayer extends React.Component<IProps, IState> {
         const {x, y} = point;
 
         const updatedGate: IGateShape = {
-            height: y - activeGate.y,
-            width: x - activeGate.x,
-            x: activeGate.x,
-            y: activeGate.y
+            ...activeGate,
+            height: (y > activeGate.originY) ? y - activeGate.y : activeGate.originY - y,
+            width: (x > activeGate.originX) ? x - activeGate.x : activeGate.originX - x,
+            x: (x > activeGate.originX) ? activeGate.originX: x,
+            y: (y > activeGate.originY) ? activeGate.originY: y,
         };
-
-        if (x < activeGate.x) {
-            updatedGate.x = x;
-            updatedGate.width = activeGate.x - x;
-        }
-
-        if (y < activeGate.y) {
-            updatedGate.y = y;
-            updatedGate.height = activeGate.y - y;
-        }
 
         this.setState({
             ...this.state,
@@ -155,10 +171,72 @@ class GateLayer extends React.Component<IProps, IState> {
         });
     };
 
-    private handleMouseUp = () => this.setState({
-        ...this.state,
-        isGatingActive: false,
-    });
+    private handleMouseUp = () => {
+        const {activeGate, isGatingActive} = this.state;
+        if (!isGatingActive || !activeGate) {
+            return;
+        }
+        this.setState({
+            ...this.state,
+            isGateCreationDialogOpen: true,
+        });
+    };
+
+    private gateCreationDialog = () => {
+        const {isGateCreationDialogOpen} = this.state;
+
+        const handleOnCancel = () => {
+            const {gates} = this.state;
+            this.setState({
+                ...this.state,
+                gates,
+                isGateCreationDialogOpen: false,
+                isGatingActive: false,
+            });
+        };
+
+        const handleOnOk = () => {
+            const {activeGate, gates} = this.state;
+            if (!activeGate) {
+                return;
+            }
+            this.setState({
+                ...this.state,
+                gates: [...gates, activeGate],
+                isGateCreationDialogOpen: false,
+                isGatingActive: false,
+            });
+        };
+
+        return (
+            <Dialog
+                icon='info-sign'
+                title='Subpopulation identification'
+                onClose={handleOnCancel}
+                isOpen={isGateCreationDialogOpen}
+            >
+                <div className={Classes.DIALOG_BODY}>
+                    <SubPopulationFormGroup
+                        label="Enter the name of this subpopulation:"
+                        labelFor="name"
+                    >
+                        <InputGroup id="name"
+                                    placeholder="Subpopulation name"
+                                    value="Lymphocytes"
+                                    autoFocus={true}
+                        />
+                    </SubPopulationFormGroup>
+                </div>
+                <div className={Classes.DIALOG_FOOTER}>
+                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                        <Button onClick={handleOnCancel}>Cancel</Button>
+                        <Button onClick={handleOnOk} intent={Intent.PRIMARY}>Ok</Button>
+                    </div>
+                </div>
+            </Dialog>
+        );
+    };
+
 }
 
 
