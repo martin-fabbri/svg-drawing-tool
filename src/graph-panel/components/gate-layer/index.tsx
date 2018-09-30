@@ -1,20 +1,20 @@
-import {Button, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
-import * as Classes from "@blueprintjs/core/lib/esm/common/classes";
 import * as React from 'react';
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
+import GateCreationDialog from "./gate-creation-dialog";
 
 interface IProps {
     debug?: boolean;
 }
 
-interface IGateShape {
+export interface IGateShape {
     originX: number;
     originY: number;
     x: number;
     y: number;
     width: number;
     height: number;
+    name?: string;
 }
 
 interface IState {
@@ -35,13 +35,6 @@ const GateRect = styled.rect`
     stroke-width: 1.5;
     pointer-events: none;
     fill: transparent;
-`;
-
-const SubPopulationFormGroup = styled(FormGroup)`
-    font-size: 14px !important;
-    > label {
-        font-size: 14px !important;
-    }
 `;
 
 function DrawingGate(props: IDrawingGateProps) {
@@ -86,10 +79,10 @@ class GateLayer extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const {activeGate, isGatingActive, gates} = this.state;
+        const {activeGate, isGatingActive, gates, isGateCreationDialogOpen} = this.state;
         return (
             <>
-                {this.gateCreationDialog()}
+                <GateCreationDialog activeGate={activeGate} handleOnCancel={this.handleOnCancel} handleOnOk={this.handleOnOk} isOpen={isGateCreationDialogOpen}/>
                 <div
                     style={{width: '400px', height: '400px', border: '1px solid black'}}
                     ref={this.areaPlotRef}
@@ -138,7 +131,7 @@ class GateLayer extends React.Component<IProps, IState> {
 
         this.setState({
             ...this.state,
-            activeGate: {x, y, width: 0, height: 0, originX: x, originY: y},
+            activeGate: {x, y, width: 0, height: 0, originX: x, originY: y, name: 'Lymphocytes'},
             isGatingActive: true,
         });
     };
@@ -182,61 +175,27 @@ class GateLayer extends React.Component<IProps, IState> {
         });
     };
 
-    private gateCreationDialog = () => {
-        const {isGateCreationDialogOpen} = this.state;
+    private handleOnCancel = () => {
+        const {gates} = this.state;
+        this.setState({
+            ...this.state,
+            gates,
+            isGateCreationDialogOpen: false,
+            isGatingActive: false,
+        });
+    };
 
-        const handleOnCancel = () => {
-            const {gates} = this.state;
-            this.setState({
-                ...this.state,
-                gates,
-                isGateCreationDialogOpen: false,
-                isGatingActive: false,
-            });
-        };
-
-        const handleOnOk = () => {
-            const {activeGate, gates} = this.state;
-            if (!activeGate) {
-                return;
-            }
+    private handleOnOk = () => {
+        const {activeGate, gates} = this.state;
+        if (activeGate) {
             this.setState({
                 ...this.state,
                 gates: [...gates, activeGate],
                 isGateCreationDialogOpen: false,
                 isGatingActive: false,
             });
-        };
-
-        return (
-            <Dialog
-                icon='info-sign'
-                title='Subpopulation identification'
-                onClose={handleOnCancel}
-                isOpen={isGateCreationDialogOpen}
-            >
-                <div className={Classes.DIALOG_BODY}>
-                    <SubPopulationFormGroup
-                        label="Enter the name of this subpopulation:"
-                        labelFor="name"
-                    >
-                        <InputGroup id="name"
-                                    placeholder="Subpopulation name"
-                                    value="Lymphocytes"
-                                    autoFocus={true}
-                        />
-                    </SubPopulationFormGroup>
-                </div>
-                <div className={Classes.DIALOG_FOOTER}>
-                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                        <Button onClick={handleOnCancel}>Cancel</Button>
-                        <Button onClick={handleOnOk} intent={Intent.PRIMARY}>Ok</Button>
-                    </div>
-                </div>
-            </Dialog>
-        );
+        }
     };
-
 }
 
 
