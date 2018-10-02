@@ -2,10 +2,17 @@ import {Button, Classes, FormGroup, InputGroup, Intent} from "@blueprintjs/core"
 import {Field, FieldProps, Form, Formik, FormikProps} from "formik";
 import * as React from 'react';
 
-
 interface IShapeValues {
     name: string;
 }
+
+const validateShapeName = (value: string) => {
+    let error = '';
+    if (!value) {
+        error = 'Required';
+    }
+    return error;
+};
 
 const submit = (values: IShapeValues) => {
     console.log('on submit', values);
@@ -13,36 +20,37 @@ const submit = (values: IShapeValues) => {
 
 const shapeNameInput = ({field, form}: FieldProps<IShapeValues>) => (
     <div>
-        <InputGroup id="shape-name" {...field} placeholder="Shape Name"/>
-        {form.touched.name && form.errors.name &&
-            form.errors.name}
+        <FormGroup
+            helperText={form.touched.name && form.errors.name ? form.errors.name : ''}
+            label="Shape Name"
+            labelFor="shape-name">
+            <InputGroup id="shape-name" {...field} placeholder="Shape Name"/>
+        </FormGroup>
     </div>
 );
 
-const render = (formikBag: FormikProps<IShapeValues>) => (
-    <Form>
-        <FormGroup
-            helperText="Shape name is required ..."
-            label="Shape Name"
-            labelFor="shape-name"
-            labelInfo="(required)">
+const render = ({isSubmitting}: FormikProps<IShapeValues>) => {
+    return (
+        <Form>
             <Field
                 name='name'
-                render={shapeNameInput}/>
-        </FormGroup>
-        <div className={Classes.DIALOG_FOOTER}>
-            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                <Button>Cancel</Button>
-                <Button intent={Intent.PRIMARY}>Ok</Button>
+                render={shapeNameInput}
+                validate={validateShapeName}
+                type='text'/>
+            <div className={Classes.DIALOG_FOOTER}>
+                <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                    <Button type='button' disabled={isSubmitting}>Cancel</Button>
+                    <Button intent={Intent.PRIMARY} type='submit' disabled={isSubmitting}>Ok</Button>
+                </div>
             </div>
-        </div>
-    </Form>
-);
+        </Form>
+    );
+};
 
 class App extends React.Component {
   public render() {
     return (
-        <Formik initialValues={{name: 'xyz'}}
+        <Formik initialValues={{name: 'Lymphocytes'}}
                 onSubmit={submit}
                 render={render}/>
     );
