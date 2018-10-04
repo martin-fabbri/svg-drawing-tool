@@ -19,14 +19,12 @@ const submit = (values: IShapeValues) => {
 };
 
 const shapeNameInput = ({field, form}: FieldProps<IShapeValues>) => (
-    <div>
-        <FormGroup
-            helperText={form.touched.name && form.errors.name ? form.errors.name : ''}
-            label="Shape Name"
-            labelFor="shape-name">
-            <InputGroup id="shape-name" {...field} placeholder="Shape Name"/>
-        </FormGroup>
-    </div>
+    <FormGroup
+        helperText={form.touched.name && form.errors.name ? form.errors.name : ''}
+        label="Shape Name"
+        labelFor="shape-name">
+        <InputGroup id="shape-name" {...field} placeholder="Shape Name"/>
+    </FormGroup>
 );
 
 const render = ({isSubmitting}: FormikProps<IShapeValues>) => {
