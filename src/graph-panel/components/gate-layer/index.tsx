@@ -1,10 +1,18 @@
 import * as React from 'react';
-import { MouseEvent } from 'react';
-import styled from 'styled-components';
-import GateCreationDialog from "./gate-creation-dialog";
+import {MouseEvent} from 'react';
+import GateCreationDialog from './gate-creation-dialog';
+import Stage from './stage';
 
 interface IProps {
     debug?: boolean;
+}
+
+export enum GateType {
+    Ellipse = 'Ellipse',
+    Rectangle = 'Rectangle',
+    Quad = 'Quad',
+    Spider = 'Spider',
+    Polygon = 'Polygon',
 }
 
 export interface IGateShape {
@@ -15,6 +23,18 @@ export interface IGateShape {
     width: number;
     height: number;
     name?: string;
+    type: GateType;
+    stroke?: string;
+    fill?: string;
+    strokeWidth?: number;
+    label?: IGateLabel;
+}
+
+export interface IGateLabel {
+    offsetX: number;
+    offsetY: number;
+    text: string;
+    annotation: string;
 }
 
 interface IState {
@@ -22,48 +42,6 @@ interface IState {
     isGatingActive: boolean;
     gates: IGateShape[];
     isGateCreationDialogOpen: boolean;
-}
-
-interface IDrawingGateProps {
-    gate: IGateShape,
-}
-
-const GateRect = styled.rect`
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-    stroke: #30404D;
-    stroke-width: 1.5;
-    pointer-events: none;
-    fill: transparent;
-`;
-
-function DrawingGate(props: IDrawingGateProps) {
-    const {gate} = props;
-    const {x, y , width, height} = gate;
-    return <GateRect x={x} y={y} width={width} height={height} />;
-}
-
-interface IDrawingProps {
-    gates: IGateShape[];
-    activeGate?: IGateShape;
-    isGatingActive: boolean;
-}
-
-function Drawing(props: IDrawingProps) {
-    const {gates, isGatingActive, activeGate} = props;
-    const allGates = gates.slice();
-
-    if (isGatingActive && activeGate) {
-        allGates.push(activeGate);
-    }
-
-    return (
-        <svg>
-            {allGates.map((gate, index) => (
-                <DrawingGate key={index} gate={gate} />
-            ))}
-        </svg>
-    );
 }
 
 class GateLayer extends React.Component<IProps, IState> {
@@ -88,9 +66,9 @@ class GateLayer extends React.Component<IProps, IState> {
                     ref={this.areaPlotRef}
                     onMouseDown={this.handleMouseDown}
                     onMouseMove={this.handleMouseMove}>
-                    <Drawing gates={gates}
-                             activeGate={activeGate}
-                             isGatingActive={isGatingActive}/>
+                    <Stage gates={gates}
+                           activeGate={activeGate}
+                           isGatingActive={isGatingActive}/>
                 </div>
             </>
         );
@@ -131,7 +109,16 @@ class GateLayer extends React.Component<IProps, IState> {
 
         this.setState({
             ...this.state,
-            activeGate: {x, y, width: 0, height: 0, originX: x, originY: y, name: 'Lymphocytes'},
+            activeGate: {
+                height: 0,
+                name: 'Lymphocytes',
+                originX: x,
+                originY: y,
+                type: GateType.Rectangle,
+                width: 0,
+                x,
+                y
+            },
             isGatingActive: true,
         });
     };
@@ -185,9 +172,15 @@ class GateLayer extends React.Component<IProps, IState> {
         });
     };
 
-    private handleOnOk = () => {
+    private handleOnOk = (newGate: IGateShape | undefined) => {
         const {activeGate, gates} = this.state;
         if (activeGate) {
+            activeGate.label = {
+                annotation: '',
+                offsetX: activeGate.width / 2,
+                offsetY: activeGate.height / 2,
+                text: newGate && newGate.name ? newGate.name : 'Lymphocytes',
+            };
             this.setState({
                 ...this.state,
                 gates: [...gates, activeGate],

@@ -1,60 +1,69 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
+import {Field, FieldProps, Form, Formik, FormikProps} from "formik";
 import * as React from 'react';
-import styled from "styled-components";
 import {IGateShape} from './index';
 
 interface IProps {
     activeGate: IGateShape | undefined;
     handleOnCancel: () => void;
-    handleOnOk: () => void;
+    handleOnOk: (newGate: IGateShape | undefined) => void;
     isOpen: boolean;
 }
 
-const SubPopulationFormGroup = styled(FormGroup)`
-    font-size: 14px !important;
-    > label {
-        font-size: 14px !important;
+const nameInput = ({field, form}: FieldProps<IGateShape>) => (
+    <FormGroup
+        helperText={form.touched.name && form.errors.name ? form.errors.name : ''}
+        label="Enter the name of this subpopulation"
+        labelFor="name">
+        <InputGroup id="name" {...field} placeholder="Name"/>
+    </FormGroup>
+);
+
+const validateName = (value: string) => {
+    let error = '';
+    if (!value) {
+        error = 'Name is required';
     }
-`;
-
-class GateCreationDialog extends React.Component<IProps> {
-
-    public render() {
-        const {activeGate, handleOnCancel, handleOnOk, isOpen} = this.props;
-        if (!activeGate) {
-            return null;
-        }
-
-        const {name} = activeGate;
-
-        return (
-            <Dialog
-                icon='info-sign'
-                title='Subpopulation identification'
-                onClose={handleOnCancel}
-                isOpen={isOpen}
-            >
-                <div className={Classes.DIALOG_BODY}>
-                    <SubPopulationFormGroup
-                        label="Enter the name of this subpopulation:"
-                        labelFor="name"
-                    >
-                        <InputGroup id="name"
-                                    placeholder="Subpopulation name"
-                                    value={name}
-                                    autoFocus={true}
-                        />
-                    </SubPopulationFormGroup>
-                </div>
-                <div className={Classes.DIALOG_FOOTER}>
-                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                        <Button onClick={handleOnCancel}>Cancel</Button>
-                        <Button onClick={handleOnOk} intent={Intent.PRIMARY}>Ok</Button>
-                    </div>
-                </div>
-            </Dialog>
-        );
-    }
+    return error;
 };
 
-export default GateCreationDialog;
+const GateCreationForm = (props: IProps) => {
+    const {activeGate, handleOnCancel, handleOnOk, isOpen} = props;
+
+    const render = (formikProps: FormikProps<IGateShape | undefined>) => {
+        if (!formikProps) {
+            return null;
+        }
+        const {isSubmitting} = formikProps;
+        return (
+            <Form>
+                <Field
+                    name='name'
+                    render={nameInput}
+                    validate={validateName}
+                    type='text'/>
+                <div className={Classes.DIALOG_FOOTER}>
+                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                        <Button type='button' disabled={isSubmitting} onClick={handleOnCancel}>Cancel</Button>
+                        <Button intent={Intent.PRIMARY} type='submit' disabled={isSubmitting}>Ok</Button>
+                    </div>
+                </div>
+            </Form>
+        );
+    };
+
+    return (
+        <Dialog
+            icon='info-sign'
+            title='Subpopulation identification'
+            onClose={handleOnCancel}
+            isOpen={isOpen}
+        >
+            <Formik initialValues={activeGate}
+                    onSubmit={handleOnOk}
+                    render={render}/>
+        </Dialog>
+    );
+};
+
+export default GateCreationForm;
