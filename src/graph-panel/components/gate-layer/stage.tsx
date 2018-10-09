@@ -35,13 +35,16 @@ const Gate = (props: IGateProps) => {
 
     return (<>
         {label &&
+            <g>
             <Label
                 x={x + label.offsetX}
                 y={y + label.offsetY}
                 textAnchor="middle"
                 alignmentBaseline="central"
                 filter="url(#label-background-filter)"
-            >{label.text}</Label>}
+            ><tspan x={x + label.offsetX} y={y + label.offsetY} dy="0">{label.text}</tspan>
+                <tspan x={x + label.offsetX} y={y + label.offsetY} dy="1.5em">0%</tspan>
+            </Label></g>}
         {gateShape}
     </>);
 };

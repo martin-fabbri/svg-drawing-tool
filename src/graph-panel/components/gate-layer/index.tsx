@@ -107,7 +107,7 @@ class GateLayer extends React.Component<IProps, IState> {
             return;
         }
 
-        const {changeActiveTool} = this.props;
+        const {activeTool, changeActiveTool} = this.props;
 
         const {x, y} = point;
 
@@ -126,7 +126,9 @@ class GateLayer extends React.Component<IProps, IState> {
             isGatingActive: true,
         });
 
-        changeActiveTool(GraphPanelTools.Rectangle);
+        if (activeTool === GraphPanelTools.Selection) {
+            changeActiveTool(GraphPanelTools.Rectangle);
+        }
     };
 
     private handleMouseMove = (e: MouseEvent) => {
@@ -184,7 +186,7 @@ class GateLayer extends React.Component<IProps, IState> {
             activeGate.label = {
                 annotation: '',
                 offsetX: activeGate.width / 2,
-                offsetY: activeGate.height / 2,
+                offsetY: activeGate.height / 2 - 5,
                 text: newGate && newGate.name ? newGate.name : 'Lymphocytes',
             };
             this.setState({
