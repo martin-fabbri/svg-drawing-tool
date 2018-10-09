@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {MouseEvent} from 'react';
+import {GraphPanelTools} from "../../constants";
 import GateCreationDialog from './gate-creation-dialog';
 import Stage from './stage';
 
 interface IProps {
-    debug?: boolean;
+    activeTool: GraphPanelTools;
+    changeActiveTool: (selectedTool: GraphPanelTools) => void;
 }
 
 export enum GateType {
@@ -105,6 +107,8 @@ class GateLayer extends React.Component<IProps, IState> {
             return;
         }
 
+        const {changeActiveTool} = this.props;
+
         const {x, y} = point;
 
         this.setState({
@@ -121,6 +125,8 @@ class GateLayer extends React.Component<IProps, IState> {
             },
             isGatingActive: true,
         });
+
+        changeActiveTool(GraphPanelTools.Rectangle);
     };
 
     private handleMouseMove = (e: MouseEvent) => {

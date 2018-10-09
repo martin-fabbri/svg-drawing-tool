@@ -65,6 +65,7 @@ class App extends React.Component<IProps, IState> {
 
         // const { activeTool } = this.props.graphPanel;
         const { activeTool } = this.state;
+        const {  handleToolSelection } = this;
 
         return (
             <Container>
@@ -72,7 +73,7 @@ class App extends React.Component<IProps, IState> {
                     <Toolbar activeTool={activeTool} onToolSelected={this.handleToolSelection}/>
                 </ToolbarArea>
                 <StageArea>
-                    <GateLayer />
+                    <GateLayer activeTool={activeTool} changeActiveTool={handleToolSelection}/>
                 </StageArea>
             </Container>
         );

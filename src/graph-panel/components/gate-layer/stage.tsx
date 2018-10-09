@@ -40,7 +40,7 @@ const Gate = (props: IGateProps) => {
                 y={y + label.offsetY}
                 textAnchor="middle"
                 alignmentBaseline="central"
-                filter="url(#solid)"
+                filter="url(#label-background-filter)"
             >{label.text}</Label>}
         {gateShape}
     </>);
@@ -63,7 +63,7 @@ const Stage = (props: IStageProps) => {
     return (
         <svg>
             <defs>
-                <filter x="0" y="0" width="1" height="1" id="solid">
+                <filter x="0" y="0" width="1" height="1" id="label-background-filter">
                     <feFlood floodColor="white" floodOpacity={0.5}/>
                     <feComposite in="SourceGraphic"/>
                 </filter>
