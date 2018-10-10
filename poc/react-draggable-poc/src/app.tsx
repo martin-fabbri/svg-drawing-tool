@@ -14,8 +14,8 @@ class App extends React.Component {
   public render() {
     return (
       <Svg innerRef={this.containerRef}>
-          <Node x={50} y={350} parent={this.containerRef}/>
-          <Node x={100} y={100} parent={this.containerRef}/>
+          <Node x={50} y={350} width={300} height={100} parent={this.containerRef}/>
+          <Node x={100} y={100} width={200} height={50} parent={this.containerRef}/>
       </Svg>
     );
   }

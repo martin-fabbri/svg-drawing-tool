@@ -5,12 +5,16 @@ import { DraggableCore, DraggableData } from 'react-draggable';
 interface IProps {
     x: number;
     y: number;
+    width: number;
+    height: number;
     parent: RefObject<SVGElement>;
 }
 
 interface IState {
     x: number;
     y: number;
+    width: number;
+    height: number;
     isDragging: boolean;
 }
 
@@ -18,22 +22,25 @@ class Node extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
+            height: props.height,
             isDragging: false,
+            width: props.width,
             x: props.x,
             y: props.y
         }
     }
 
     public render() {
-        const {x,y} = this.state;
+        const {height, width, x, y} = this.state;
         return (
             <DraggableCore
                 onDrag={this.handleDrag}
             >
-                <circle
-                    r="20"
-                    cx={x}
-                    cy={y}
+                <rect
+                    x={x}
+                    y={y}
+                    width={width}
+                    height={height}
                 />
             </DraggableCore>
         );
@@ -48,32 +55,44 @@ class Node extends React.Component<IProps, IState> {
 
         let transX: number;
 
-        if (x <= bounds.left) {
-            transX = bounds.left;
-        } else if (x >= bounds.left + bounds.width) {
-            transX = bounds.left + bounds.width;
-        } else {
-            transX = this.state.x + deltaX < bounds.left ?
-                bounds.left :
-                this.state.x + deltaX > bounds.left + bounds.width ?
-                    bounds.left + bounds.width :
-                    this.state.x + deltaX;
-        }
+        transX = ((this.state.x + 80) / 2) + deltaX < bounds.left ?
+            (this.state.x + this.state.width) / 2 :
+            this.state.x + deltaX > bounds.left + bounds.width ?
+                bounds.left + bounds.width :
+                this.state.x + deltaX;
+
+        //
+        // if (x <= bounds.left) {
+        //     transX = bounds.left;
+        // } else if (x >= bounds.left + bounds.width) {
+        //     transX = bounds.left + bounds.width;
+        // } else {
+        //     transX = this.state.x + deltaX < bounds.left ?
+        //         bounds.left :
+        //         this.state.x + deltaX > bounds.left + bounds.width ?
+        //             bounds.left + bounds.width :
+        //             this.state.x + deltaX;
+        // }
 
         let transY: number;
 
-        if (y <= bounds.top) {
-            transY = bounds.top;
-        } else if (y >= bounds.top + bounds.height) {
-            transY = bounds.top + bounds.height;
-        } else {
-            transY = this.state.y + deltaY < bounds.top ?
-                bounds.top :
-                this.state.y + deltaY > bounds.top + bounds.height ?
-                    bounds.top + bounds.height :
-                    this.state.y + deltaY;
-        }
+        transY = this.state.y + deltaY < bounds.top ?
+            bounds.top :
+            this.state.y + deltaY > bounds.top + bounds.height ?
+                bounds.top + bounds.height :
+                this.state.y + deltaY;
 
+        // if (y <= bounds.top) {
+        //     transY = bounds.top;
+        // } else if (y >= bounds.top + bounds.height) {
+        //     transY = bounds.top + bounds.height;
+        // } else {
+        //     transY = this.state.y + deltaY < bounds.top ?
+        //         bounds.top :
+        //         this.state.y + deltaY > bounds.top + bounds.height ?
+        //             bounds.top + bounds.height :
+        //             this.state.y + deltaY;
+        // }
 
         this.setState({
             ...this.state,
