@@ -53,46 +53,35 @@ class Node extends React.Component<IProps, IState> {
 
         const bounds = this.props.parent.current.getBoundingClientRect();
 
+        const gateCentroidX = this.state.x + (this.state.width / 2);
+        const draggedCentroidX = gateCentroidX + deltaX;
+
         let transX: number;
 
-        transX = ((this.state.x + 80) / 2) + deltaX < bounds.left ?
-            (this.state.x + this.state.width) / 2 :
-            this.state.x + deltaX > bounds.left + bounds.width ?
-                bounds.left + bounds.width :
-                this.state.x + deltaX;
+        if ((x <= bounds.left) || (x >= bounds.left + bounds.width)) {
+            transX = this.state.x;
+        } else {
+            transX = draggedCentroidX < bounds.left ?
+                this.state.x :
+                draggedCentroidX > bounds.left + bounds.width ?
+                    this.state.x :
+                    this.state.x + deltaX;
+        }
 
-        //
-        // if (x <= bounds.left) {
-        //     transX = bounds.left;
-        // } else if (x >= bounds.left + bounds.width) {
-        //     transX = bounds.left + bounds.width;
-        // } else {
-        //     transX = this.state.x + deltaX < bounds.left ?
-        //         bounds.left :
-        //         this.state.x + deltaX > bounds.left + bounds.width ?
-        //             bounds.left + bounds.width :
-        //             this.state.x + deltaX;
-        // }
+        const gateCentroidY = this.state.y + (this.state.height / 2);
+        const draggedCentroidY = gateCentroidY + deltaY;
 
         let transY: number;
 
-        transY = this.state.y + deltaY < bounds.top ?
-            bounds.top :
-            this.state.y + deltaY > bounds.top + bounds.height ?
-                bounds.top + bounds.height :
-                this.state.y + deltaY;
-
-        // if (y <= bounds.top) {
-        //     transY = bounds.top;
-        // } else if (y >= bounds.top + bounds.height) {
-        //     transY = bounds.top + bounds.height;
-        // } else {
-        //     transY = this.state.y + deltaY < bounds.top ?
-        //         bounds.top :
-        //         this.state.y + deltaY > bounds.top + bounds.height ?
-        //             bounds.top + bounds.height :
-        //             this.state.y + deltaY;
-        // }
+        if ((y <= bounds.top) || (y >= bounds.top + bounds.height)) {
+            transY = this.state.y;
+        } else {
+            transY = draggedCentroidY < bounds.top ?
+                this.state.y :
+                draggedCentroidY > bounds.top + bounds.height ?
+                    this.state.y :
+                    this.state.y + deltaY;
+        }
 
         this.setState({
             ...this.state,
