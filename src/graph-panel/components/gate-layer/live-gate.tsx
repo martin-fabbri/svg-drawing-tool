@@ -8,6 +8,7 @@ interface IGateProps {
 
 class LiveGate extends React.Component<IGateProps> {
     public render() {
+        console.log('Rendering: LiveGate');
         const {gate} = this.props;
         if (!gate) {
             return null;
