@@ -18,7 +18,7 @@ interface IState {
     isDragging: boolean;
 }
 
-class Node extends React.Component<IProps, IState> {
+class Gate extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -89,7 +89,6 @@ class Node extends React.Component<IProps, IState> {
             y: transY,
         });
     };
-
 }
 
-export default Node;
+export default Gate;

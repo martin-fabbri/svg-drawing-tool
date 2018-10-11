@@ -1,7 +1,11 @@
 import * as React from 'react';
+import {DraggableData} from "react-draggable";
+import {v4 as uuid} from  "uuid";
 import GateLayer from "./graph-panel/components/gate-layer";
 import Toolbar from './graph-panel/components/toolbar';
 import {GraphPanelTools} from "./graph-panel/constants";
+import {Provider as GraphPanelProvider} from './graph-panel/duck/context';
+import {GateType, IGateShape, IGraphPanelState} from "./graph-panel/interfaces";
 import styled from './styled-components';
 
 // import {connect} from 'react-redux';
@@ -43,19 +47,20 @@ interface IProps {
     debug?: boolean;
 }
 
-interface IState {
-    activeTool: GraphPanelTools;
-    isGatingActive: boolean;
-    isGatingMode: boolean;
-}
-
-class App extends React.Component<IProps, IState> {
+class App extends React.Component<IProps, IGraphPanelState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
             activeTool: GraphPanelTools.Selection,
-            isGatingActive: false,
-            isGatingMode: false,
+            gates: [],
+            isDraggingTool: false,
+            isGateCreationDialogOpen: false,
+            isGatingLive: false,
+            selectedGates: [],
+            toolDragDeltaX: 0,
+            toolDragDeltaY: 0,
+            toolDragStartX: 0,
+            toolDragStartY: 0,
         };
     }
 
@@ -63,28 +68,91 @@ class App extends React.Component<IProps, IState> {
         // tslint:disable-next-line
         console.log('Rendering: GraphPanel');
 
-        // const { activeTool } = this.props.graphPanel;
-        const { activeTool } = this.state;
-        const {  handleToolSelection } = this;
+        const { handleStageDrag, handleStageDragStart, handleOnToolSelected, handleStageDragStop } = this;
 
         return (
-            <Container>
-                <ToolbarArea>
-                    <Toolbar activeTool={activeTool} onToolSelected={this.handleToolSelection}/>
-                </ToolbarArea>
-                <StageArea>
-                    <GateLayer activeTool={activeTool} changeActiveTool={handleToolSelection}/>
-                </StageArea>
-            </Container>
+            <GraphPanelProvider value={{
+                ...this.state,
+                onStageDrag: handleStageDrag,
+                onStageDragStart: handleStageDragStart,
+                onStageDragStop: handleStageDragStop,
+                onToolSelected: handleOnToolSelected,
+            }}>
+                <Container>
+                    <ToolbarArea>
+                        <Toolbar />
+                    </ToolbarArea>
+                    <StageArea>
+                        <GateLayer />
+                    </StageArea>
+                </Container>
+            </GraphPanelProvider>
         );
     }
 
-    private handleToolSelection = (selectedTool: GraphPanelTools) => {
-        // tslint:disable-next-line
-        console.log(`${selectedTool} tool was selected`);
+    private handleStageDrag = (e: MouseEvent, {deltaX, deltaY}: DraggableData) => {
+        const {toolDragDeltaX, toolDragDeltaY, liveGate} = this.state;
 
-        // const {setActiveTool} = this.props;
-        // setActiveTool(selectedTool);
+        if (!liveGate) {
+            return;
+        }
+        const dx = toolDragDeltaX + deltaX;
+        const dy = toolDragDeltaY + deltaY;
+
+        const deltaLiveGate: IGateShape = {
+            ...liveGate,
+            dx,
+            dy,
+        };
+
+        this.setState({
+            ...this.state,
+            liveGate: deltaLiveGate,
+            selectedGates: [deltaLiveGate],
+            toolDragDeltaX: dx,
+            toolDragDeltaY: dy,
+        });
+    };
+
+    private handleStageDragStart = (e: MouseEvent, data: DraggableData) => {
+        // const t = e.target as SVGElement;
+
+        // console.log(data);
+        console.log(data.node.getBoundingClientRect());
+
+        const {x, y, node} = data;
+        const boundingRect = node.getBoundingClientRect();
+
+        const liveGate: IGateShape = {
+            dx: 0,
+            dy: 0,
+            name: 'Lymphocytes',
+            type: GateType.Rectangle,
+            uuid: uuid(),
+            x: x - boundingRect.left,
+            y: y - boundingRect.top,
+        };
+
+        this.setState({
+            ...this.state,
+            isDraggingTool: true,
+            isGatingLive: true,
+            liveGate,
+            selectedGates: [liveGate],
+            toolDragDeltaX: 0,
+            toolDragDeltaY: 0,
+            toolDragStartX: x - boundingRect.left,
+            toolDragStartY: y - boundingRect.top,
+        });
+    };
+
+    private handleStageDragStop = (e: MouseEvent, data: DraggableData) => {
+        // const t = e.target as SVGElement;
+        console.log(data);
+    };
+
+    private handleOnToolSelected = (selectedTool: GraphPanelTools) => {
+        console.log(`${selectedTool} tool was selected`);
 
         switch (selectedTool) {
             case GraphPanelTools.Rectangle:
@@ -98,27 +166,18 @@ class App extends React.Component<IProps, IState> {
                 this.setState({
                     ...this.state,
                     activeTool: selectedTool,
-                    isGatingActive: true,
-                    isGatingMode: true,
+                    isGatingLive: true,
                 });
                 break;
             default:
                 this.setState({
                     ...this.state,
                     activeTool: GraphPanelTools.Selection,
+                    isGatingLive: false,
                 });
                 break;
         }
     }
 }
 
-// const mapStateToProps = (state: IAppState) => {
-//     return { graphPanel: state.graphPanel };
-// };
-//
-// const mapDispatchToProps = {
-//     setActiveTool: actions.setActiveTool,
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

@@ -1,7 +1,7 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
 import {Field, FieldProps, Form, Formik, FormikProps} from "formik";
 import * as React from 'react';
-import {IGateShape} from './index';
+import {IGateShape} from '../../interfaces';
 
 interface IProps {
     activeGate: IGateShape | undefined;
