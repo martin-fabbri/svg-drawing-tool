@@ -1,6 +1,28 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import {GateType, IGateShape} from "../../interfaces";
+
+const dashmarkSize = 7;
+const selectedColor = '#007eff';
+
+const gateSelectionKeyFrames = keyframes`
+  0% {
+    stroke-dashoffset: 0
+  }
+      
+  100% {
+    stroke-dashoffset: -10
+  }
+`;
+
+const GateSelection = styled.rect`
+    animation: ${gateSelectionKeyFrames} 750ms linear infinite;
+    stroke: '${selectedColor}';
+    stroke-dasharray: ${dashmarkSize}, ${dashmarkSize};
+    stroke-width: 2.5;
+    stroke: ${props => props.stroke};
+    fill: transparent;
+`;
 
 export const GateRect = styled.rect<{ stroke: string, strokeWidth: number }>`
     stroke-linecap: butt;
@@ -10,15 +32,6 @@ export const GateRect = styled.rect<{ stroke: string, strokeWidth: number }>`
     pointer-events: none;
     fill: transparent;
 `;
-
-// .selection
-// animation-duration: 750ms
-// animation-iteration-count: infinite
-// animation-name: merkaba-selection
-// animation-timing-function: linear
-// stroke: $selector-color
-// stroke-dasharray: $dashmark-size, $dashmark-size
-// stroke-width: 4px
 
 const seletedStroke = '#007eff';
 const defaultStroke = '#30404D';
@@ -38,7 +51,12 @@ export const getGateShape = (gate: IGateShape, selected=false): React.ReactNode 
     switch (type) {
         case GateType.Rectangle:
             console.log(absolutizeCoordinates(x, y, dx, dy));
-            return <GateRect key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} stroke={stroke} strokeWidth={strokeWidth}/>;
+            if (selected) {
+                return <GateSelection key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} stroke={stroke} strokeWidth={strokeWidth}/>;
+            } else {
+                return <GateRect key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} stroke={stroke} strokeWidth={strokeWidth}/>;
+            }
+
         default:
             return <GateRect key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} stroke={stroke} strokeWidth={strokeWidth}/>;
     }
