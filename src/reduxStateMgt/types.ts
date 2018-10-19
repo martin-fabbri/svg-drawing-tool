@@ -1,6 +1,6 @@
 // tslint:disable-next-line
 export interface GroupState {
-  uuid: string;
+  uuid?: string;
   // name: string;
   // dataSources?: string[];
   // parents?: string[];
@@ -16,7 +16,7 @@ export interface GroupState {
 
 // tslint:disable-next-line
 export interface PopulationDef {
-  uuid: string;
+  uuid?: string;
   // name: string;
   // type: PopulationDefTypes;
   // groupId?: string;
@@ -24,4 +24,10 @@ export interface PopulationDef {
   // parents?: string[];
   // children?: string[];
   // gateDefinition?: any;
+}
+
+// tslint:disable-next-line
+export interface ParameterAxis {
+    parameterSpec?: any;
+    transform?: any;
 }

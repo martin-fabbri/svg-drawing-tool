@@ -2,6 +2,7 @@ import * as React from 'react';
 import GateLayer from "./features/graph-panel/components/gate-layer";
 import Toolbar from './features/graph-panel/components/toolbar';
 import {GraphPanelTools} from "./features/graph-panel/constants";
+import GraphPanelContext from './features/graph-panel/duck/context';
 import styled from './styled-components';
 
 // import {connect} from 'react-redux';
@@ -37,17 +38,17 @@ const ToolbarArea = styled.div`
     height: 100%;
 `;
 
-interface IState {
-    activeTool: GraphPanelTools;
-}
-
 interface IProps {
     // graphPanel: GraphPanelState;
     // setActiveTool: typeof actions.setActiveTool,
     debug?: boolean;
 }
 
-class App extends React.Component<IProps, IState> {
+interface IContextState {
+    activeTool: GraphPanelTools;
+}
+
+class App extends React.Component<IProps, IContextState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -58,17 +59,32 @@ class App extends React.Component<IProps, IState> {
     public render() {
         // tslint:disable-next-line
         console.log('Rendering: GraphPanel');
-
         const {activeTool} = this.state;
-
         return (
             <Container>
-                <ToolbarArea>
-                    <Toolbar activeTool={activeTool} onToolSelected={this.handleOnToolSelected} />
-                </ToolbarArea>
-                <StageArea>
-                    <GateLayer activeTool={activeTool}/>
-                </StageArea>
+                <GraphPanelContext.Provider value={{
+                    activeTool,
+                    onToolSelected: this.handleOnToolSelected,
+                    selectedGroup: {},
+                    selectedPopDef: {}
+                }}>
+                    <ToolbarArea>
+                        <Toolbar />
+                    </ToolbarArea>
+                    <StageArea>
+                        <GateLayer
+                            xParameterDef={{}}
+                            yParameterDef={{}}
+                            style={{
+                                height: `100%`,
+                                position: 'absolute',
+                                right: 0,
+                                top: 0,
+                                width: `100%`,
+                            }}/>
+                    </StageArea>
+                </GraphPanelContext.Provider>
+
             </Container>
         );
     }

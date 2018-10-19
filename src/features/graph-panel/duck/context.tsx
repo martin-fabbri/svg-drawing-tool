@@ -5,13 +5,14 @@ import { GraphPanelTools } from "../constants";
 export interface IGraphPanelContext {
   activeTool: GraphPanelTools;
   onToolSelected: (selectedTool: GraphPanelTools) => void;
-  selectedPopDef?: PopulationDef,
-  selectedGroup?: GroupState,
+  selectedPopDef?: PopulationDef;
+  selectedGroup?: GroupState;
 }
 
 const GraphPanelContext = React.createContext<IGraphPanelContext>({
   activeTool: GraphPanelTools.Selection,
-  onToolSelected: (selectedTool: GraphPanelTools) => console.error('onToolSelected has not been implemented'),
+  onToolSelected: (selectedTool: GraphPanelTools) =>
+    console.error("onToolSelected has not been implemented"),
 });
 
 export const withGraphPanelContext = <P extends {}>(Component: React.ComponentType<P>) =>
@@ -21,7 +22,7 @@ export const withGraphPanelContext = <P extends {}>(Component: React.ComponentTy
         <GraphPanelContext.Consumer>
           {(context: IGraphPanelContext) => <Component {...this.props} {...context} />}
         </GraphPanelContext.Consumer>
-    );
+      );
     }
   };
 

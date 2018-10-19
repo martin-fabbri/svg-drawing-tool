@@ -1,23 +1,22 @@
-import * as React from 'react';
-import { IGateShape } from '../../interfaces';
-import Gate from './gate';
+import * as React from "react";
+import { IGateShape } from "../../interfaces";
+import Gate from "./gate";
 
 interface IStageProps {
-    gates: IGateShape[];
+  gates: IGateShape[];
 }
 
 class Stage extends React.PureComponent<IStageProps> {
-    public render() {
-        const {gates} = this.props;
-        console.log('Rendering: Stage');
-        return (
-            <g>
-                {gates.map((gate, index) => (
-                    <Gate key={index} gate={gate} />
-                ))}
-            </g>
-        );
-    }
+  public render() {
+    const { gates } = this.props;
+    return (
+      <g>
+        {gates.map((gate, index) => (
+          <Gate key={index} gate={gate} />
+        ))}
+      </g>
+    );
+  }
 }
 
 export default Stage;
