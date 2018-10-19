@@ -5,7 +5,7 @@ import {
     NavbarGroup,
 } from "@blueprintjs/core";
 import * as React from 'react';
-import styled from '../../../styled-components';
+import styled from '../../../../styled-components';
 import {GraphPanelTools} from "../../constants";
 import ToolbarOption from "./tool-option";
 

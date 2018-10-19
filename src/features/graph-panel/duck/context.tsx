@@ -1,6 +1,6 @@
 import * as React from "react";
-import { GraphPanelTools } from "../constants";
 import { GroupState, PopulationDef } from "../../../reduxStateMgt/types";
+import { GraphPanelTools } from "../constants";
 
 export interface IGraphPanelContext {
   activeTool: GraphPanelTools;

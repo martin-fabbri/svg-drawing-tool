@@ -1,6 +1,6 @@
 import {Popover, Position} from "@blueprintjs/core";
 import * as React from "react";
-import {withGraphPanelContext} from "../../../../poc/context-poc/src/context";
+import {withGraphPanelContext} from "../../../../../poc/context-poc/src/context";
 
 interface IProps {
     isGating?: boolean;

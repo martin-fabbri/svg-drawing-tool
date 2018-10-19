@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { GraphPanelState, reducer } from './graph-panel/duck/reducers';
+import { GraphPanelState, reducer } from './features/graph-panel/duck/reducers';
 
 export interface IAppState {
     graphPanel: GraphPanelState;

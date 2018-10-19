@@ -1,7 +1,7 @@
 import * as React from 'react';
-import GateLayer from "./graph-panel/components/gate-layer";
-import Toolbar from './graph-panel/components/toolbar';
-import {GraphPanelTools} from "./graph-panel/constants";
+import GateLayer from "./features/graph-panel/components/gate-layer";
+import Toolbar from './features/graph-panel/components/toolbar';
+import {GraphPanelTools} from "./features/graph-panel/constants";
 import styled from './styled-components';
 
 // import {connect} from 'react-redux';

@@ -1,6 +1,6 @@
 import {Button, Icon, Position, Tooltip} from "@blueprintjs/core";
 import * as React from "react";
-import styled, {css} from "../../../styled-components";
+import styled, {css} from "../../../../styled-components";
 import {GraphPanelTools} from "../../constants";
 import FjIcon from "./toolbar-icons";
 import ToolbarTooltip from "./toolbar-tooltip";
