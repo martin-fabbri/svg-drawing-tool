@@ -10,7 +10,7 @@ const Toobar = (props: IProps) => {
     return (
         <>
             <Button>Edit</Button>
-            <Button>Save</Button>
+            <Button><span>Save</span></Button>
             <AppContext.Consumer>
                 {({ toggleTheme }) => <Button onClick={toggleTheme}>Toggle</Button> }
             </AppContext.Consumer>

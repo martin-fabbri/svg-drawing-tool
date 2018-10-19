@@ -1,3 +1,4 @@
+import {Popover, Position} from "@blueprintjs/core";
 import * as React from 'react';
 import {DraggableCore, DraggableData} from "react-draggable";
 import {v4 as uuid} from 'uuid';
@@ -54,6 +55,17 @@ class GateLayer extends React.Component<IProps, IState> {
             <div style={{width: '400px', height: '400px', border: '1px solid black'}}
                  ref={this.areaPlotRef}>
                 <GateCreationDialog activeGate={liveGate} handleOnCancel={this.handleOnCancel} handleOnOk={this.handleOnOk} isOpen={isGateCreationDialogOpen}/>
+                <Popover
+                    content={<div>test</div>}
+                    enforceFocus={false}
+                    key={'242424242424242'}
+                    hasBackdrop={true}
+                    isOpen={true}
+                    minimal={true}
+                    position={Position.RIGHT_TOP}
+                    target={<div />}
+                />
+
                 <DraggableCore
                     onStart={this.handleStageDragStart}
                     onDrag={this.handleStageDrag}

@@ -20,9 +20,25 @@ export const themes: IThemesMap = {
     },
 };
 
-const AppContext = React.createContext({
+export interface IAppContext {
+    theme: ITheme;
+    toggleTheme: () => void;
+}
+
+const AppContext = React.createContext<IAppContext>({
     theme: themes.dark,
     toggleTheme: () => console.log('Need to implement toogleTheme')
 });
+
+export const withGraphPanelContext = <P extends {}>(Component: React.ComponentType<P>) =>
+    class WithContext extends React.PureComponent<P> {
+        public render() {
+            return (
+                <AppContext.Consumer>
+                    {(context: IAppContext) => <Component {...this.props} {...context} />}
+                </AppContext.Consumer>
+            );
+        }
+    };
 
 export default AppContext;
