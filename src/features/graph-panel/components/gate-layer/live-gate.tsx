@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IGateShape } from "../../interfaces";
-import { getGateShape, SelectionType } from "./gate-shapes";
+import { getGateShape, SelectionType } from "./gate-shape";
 
 interface IGateProps {
   gate: IGateShape | undefined;

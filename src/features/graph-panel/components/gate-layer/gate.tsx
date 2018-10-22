@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IGateShape } from "../../interfaces";
-import { getGateShape } from "./gate-shapes";
+import { getGateShape } from "./gate-shape";
 
 const Label = styled.text`
   font-size: 12px;

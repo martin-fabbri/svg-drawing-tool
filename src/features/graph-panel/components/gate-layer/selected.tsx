@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IGateShape } from "../../interfaces";
-import { getGateShape, SelectionType } from "./gate-shapes";
+import { getGateShape, SelectionType } from "./gate-shape";
 
 interface IProps {
   selectedGates: IGateShape[];
@@ -15,7 +15,8 @@ const HandleDot = styled.ellipse`
 `;
 
 const configHandles = (gate: IGateShape) => {
-  const { x, y, width, height } = gate;
+  const { x, y, dx, dy } = gate;
+
   return [
     {
       orientation: "top-left",
@@ -24,18 +25,18 @@ const configHandles = (gate: IGateShape) => {
     },
     {
       orientation: "top-right",
-      x: x + width,
+      x: x + dx,
       y,
     },
     {
       orientation: "bottom-right",
-      x: x + width,
-      y: y + height,
+      x: x + dx,
+      y: y + dy,
     },
     {
       orientation: "bottom-left",
       x,
-      y: y + height,
+      y: y + dy,
     },
   ];
 };
