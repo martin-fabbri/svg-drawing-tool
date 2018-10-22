@@ -40,14 +40,9 @@ const gates: IGateShape[] = [
   },
 ];
 
-describe("stage gates", () => {
+describe("<gate />", () => {
   it("renders active gates", () => {
     const stage = shallow(<Stage gates={gates} />);
     expect(stage.find("Gate").length).toEqual(2);
-  });
-
-  it("renders empty gates list", () => {
-    const stage = shallow(<Stage gates={[]} />);
-    expect(stage.find("Gate").length).toEqual(0);
   });
 });

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IGateShape } from "../../interfaces";
-import { getGateShape } from "./gate-shapes";
+import { getGateShape, SelectionType } from "./gate-shapes";
 
 interface IProps {
   selectedGates: IGateShape[];
@@ -56,7 +56,7 @@ const Selected = ({ selectedGates }: IProps) => (
         />
       ))}
     {selectedGates.map(gate => {
-      return getGateShape(gate, true);
+      return getGateShape(gate, SelectionType.Selected);
     })}
   </g>
 );

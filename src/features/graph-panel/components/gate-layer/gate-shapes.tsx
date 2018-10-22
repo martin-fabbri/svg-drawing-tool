@@ -1,9 +1,16 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, InterpolationValue, keyframes } from "styled-components";
 import { GateType, IGateShape } from "../../interfaces";
 
-const dashmarkSize = 7;
-const selectedColor = "#007eff";
+export enum SelectionType {
+  None = "none",
+  Selected = "selected",
+  Live = "live",
+}
+
+const lineAnimationStyles = {
+  dashmarkSize: 7,
+};
 
 const gateSelectionKeyFrames = keyframes`
   0% {
@@ -15,27 +22,45 @@ const gateSelectionKeyFrames = keyframes`
   }
 `;
 
-const GateSelection = styled.rect`
-    animation: ${gateSelectionKeyFrames} 750ms linear infinite;
-    stroke: '${selectedColor}';
-    stroke-dasharray: ${dashmarkSize}, ${dashmarkSize};
-    stroke-width: 2.5;
-    stroke: ${props => props.stroke};
-    fill: transparent;
+const GateAmination = css`
+  animation: ${gateSelectionKeyFrames} 750ms linear infinite;
+  stroke-dasharray: ${lineAnimationStyles.dashmarkSize}, ${lineAnimationStyles.dashmarkSize};
 `;
 
-export const GateRect = styled.rect<{ stroke: string; strokeWidth: number }>`
+interface IStyleAttrs {
+  lineAnimation?: InterpolationValue[];
+  stroke: string;
+  strokeWidth: number;
+}
+
+const style: Record<string, IStyleAttrs> = {
+  default: {
+    stroke: "#30404D",
+    strokeWidth: 1.5,
+  },
+  live: {
+    lineAnimation: GateAmination,
+    stroke: "#fff",
+    strokeWidth: 2.5,
+  },
+  selected: {
+    stroke: "#30404D",
+    strokeWidth: 2.5,
+  },
+};
+
+const GateRect = styled.rect<{ style: IStyleAttrs }>`
+  fill: transparent;
+
+  stroke: ${props => props.style.stroke};
   stroke-linecap: butt;
   stroke-linejoin: miter;
-  stroke: ${props => props.stroke};
-  stroke-width: 1.5;
-  pointer-events: none;
-  fill: transparent;
-`;
+  stroke-width: ${props => };
 
-const seletedStroke = "#30404D";
-const defaultStroke = "#30404D";
-const defaultStrokeWidth = 1.5;
+  pointer-events: none;
+
+  ${props => (props.selected ? GateAmination : "")};
+`;
 
 const absolutizeCoordinates = (x1: number, y1: number, x2: number, y2: number) => ({
   height: Math.abs(y2),
@@ -44,23 +69,26 @@ const absolutizeCoordinates = (x1: number, y1: number, x2: number, y2: number) =
   y: y1 + Math.min(y2, 0),
 });
 
-export const getGateShape = (gate: IGateShape, selected = false, live = false): React.ReactNode => {
+export const getGateShape = (gate: IGateShape, selectionType = SelectionType.None) => {
   const { type, x, y, dx, dy, uuid } = gate;
   // const stroke = selected ? seletedStroke : gate.stroke ? gate.stroke : defaultStroke;
 
   let stroke: string;
-  if (selected) {
-    stroke = seletedStroke;
-  } else if (live) {
-    stroke = "white";
-  } else {
-    stroke = gate.stroke ? gate.stroke : defaultStroke;
+  switch (selectionType) {
+    case SelectionType.Selected:
+      stroke = seletedStroke;
+      break;
+    case SelectionType.Live:
+      stroke = "white";
+      break;
+    default:
+      stroke = gate.stroke ? gate.stroke : defaultStroke;
   }
 
   const strokeWidth = gate.strokeWidth ? gate.strokeWidth : defaultStrokeWidth;
   switch (type) {
     case GateType.Rectangle:
-      if (selected) {
+      if (selectionType === SelectionType.Selected) {
         return (
           <GateSelection
             key={uuid}

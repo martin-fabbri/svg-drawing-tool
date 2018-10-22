@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IGateShape } from "../../interfaces";
-import { getGateShape } from "./gate-shapes";
+import { getGateShape, SelectionType } from "./gate-shapes";
 
 interface IGateProps {
   gate: IGateShape | undefined;
@@ -12,7 +12,7 @@ class LiveGate extends React.Component<IGateProps> {
     if (!gate) {
       return null;
     }
-    return getGateShape(gate, false, true);
+    return getGateShape(gate, SelectionType.Live);
   }
 }
 

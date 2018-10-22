@@ -28,6 +28,6 @@ export interface PopulationDef {
 
 // tslint:disable-next-line
 export interface ParameterAxis {
-    parameterSpec?: any;
-    transform?: any;
+  parameterSpec?: any;
+  transform?: any;
 }
