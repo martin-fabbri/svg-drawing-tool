@@ -13,6 +13,7 @@ const HandleDot = styled.ellipse`
     stroke: '${selectedColor}'
     fill: '${selectedColor}'
 `;
+HandleDot.displayName = 'HandleDot';
 
 const configHandles = (gate: IGateShape) => {
   const { x, y, dx, dy } = gate;
