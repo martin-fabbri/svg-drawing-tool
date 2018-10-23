@@ -1,7 +1,6 @@
 import { shallow } from "enzyme";
-import * as React from "react";
 import { GateType, IGateShape } from "../../interfaces";
-import {getGateShape, IStyleAttrs} from "./gate-shape";
+import {getGateShape, IStyleAttrs, SelectionType} from "./gate-shape";
 
 const rectangularGate: IGateShape = {
     dx: 0,
@@ -32,4 +31,24 @@ describe("<GateShape /> Rectangular ", () => {
     expect(style.lineAnimation).toEqual(false);
   });
 
+    it("renders live gate", () => {
+        const shape = getGateShape(rectangularGate, SelectionType.Live);
+
+        const wrapper = shallow(shape);
+        expect(wrapper.find("rect").length).toEqual(1);
+
+        const style = wrapper.find("rect").first().props().style as IStyleAttrs;
+        expect(style.lineAnimation).toEqual(false);
+        expect(style.stroke).toEqual('#fff');
+    });
+
+    it("renders selected gate", () => {
+        const shape = getGateShape(rectangularGate, SelectionType.Selected);
+
+        const wrapper = shallow(shape);
+        expect(wrapper.find("rect").length).toEqual(1);
+
+        const style = wrapper.find("rect").first().props().style as IStyleAttrs;
+        expect(style.lineAnimation).toEqual(true);
+    });
 });
