@@ -2,28 +2,28 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {ParameterAxis} from "../../../../reduxStateMgt/types";
 import {GraphPanelTools} from "../../constants";
-import {GateType, IGateShape} from "../../interfaces";
+// import {GateType, IGateShape} from "../../interfaces";
 import Index, {GateLayer} from "./index";
 
-const singularGate: IGateShape[] = [
-  {
-    dx: 50,
-    dy: 60,
-    height: 50,
-    label: {
-      annotation: "n/a",
-      offsetX: 10,
-      offsetY: 10,
-      text: "Test Gate 1",
-    },
-    name: "Test Gate 1",
-    type: GateType.Rectangle,
-    uuid: "123456",
-    width: 100,
-    x: 100,
-    y: 50,
-  },
-];
+// const singularGate: IGateShape[] = [
+//   {
+//     dx: 50,
+//     dy: 60,
+//     height: 50,
+//     label: {
+//       annotation: "n/a",
+//       offsetX: 10,
+//       offsetY: 10,
+//       text: "Test Gate 1",
+//     },
+//     name: "Test Gate 1",
+//     type: GateType.Rectangle,
+//     uuid: "123456",
+//     width: 100,
+//     x: 100,
+//     y: 50,
+//   },
+// ];
 
 const xParameterDef: ParameterAxis = {};
 const yParameterDef: ParameterAxis = {};
@@ -32,6 +32,7 @@ describe("<GateLayer /> Rectangular ", () => {
   it("Wrapped with Context", () => {
     const wrapper = shallow(<Index
         activeTool={GraphPanelTools.Selection}
+        // gates={singularGate}
         xParameterDef={xParameterDef}
         yParameterDef={yParameterDef}
         style={{}}/>);
