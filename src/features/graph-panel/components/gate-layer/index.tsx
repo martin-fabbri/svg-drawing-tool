@@ -35,7 +35,7 @@ interface IProps {
   selectedGroup?: GroupState;
 }
 
-class GateLayer extends React.Component<IProps, IState> {
+export class GateLayer extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
