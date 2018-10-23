@@ -56,11 +56,15 @@ const GateRect = styled.rect<{ style: IStyleAttrs }>`
 
   pointer-events: none;
 
-  ${props => props.style.lineAnimation && css`
-    animation: ${gateSelectionKeyFrames} 750ms linear infinite;
-    stroke-dasharray: ${lineAnimationStyles.dashmarkSize}, ${lineAnimationStyles.dashmarkSize};
-  `}
+  ${props =>
+    props.style.lineAnimation &&
+    css`
+      animation: ${gateSelectionKeyFrames} 750ms linear infinite;
+      stroke-dasharray: ${lineAnimationStyles.dashmarkSize}, ${lineAnimationStyles.dashmarkSize};
+    `};
 `;
+
+GateRect.displayName = 'GateRect';
 
 const absolutizeCoordinates = (x1: number, y1: number, x2: number, y2: number) => ({
   height: Math.abs(y2),
@@ -75,20 +79,8 @@ export const getGateShape = (gate: IGateShape, selectionType = SelectionType.Def
 
   switch (type) {
     case GateType.Rectangle:
-      return (
-        <GateRect
-          key={uuid}
-          {...absolutizeCoordinates(x, y, dx, dy)}
-          style={styleAttrs}
-        />
-      );
+      return <GateRect key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} style={styleAttrs} />;
     default:
-      return (
-        <GateRect
-          key={uuid}
-          {...absolutizeCoordinates(x, y, dx, dy)}
-          style={styleAttrs}
-        />
-      );
+      return <GateRect key={uuid} {...absolutizeCoordinates(x, y, dx, dy)} style={styleAttrs} />;
   }
 };
