@@ -1,5 +1,5 @@
-import { GraphPanelModes, GraphPanelTools } from "../constants";
-import * as fromActions from "./actions";
+import { GraphPanelModes, GraphPanelTools } from '../constants';
+import * as fromActions from './actions';
 
 export const initialState = {
   activeTool: GraphPanelTools.Selection,
@@ -10,7 +10,7 @@ export const initialState = {
       graphItems: [],
       layout: {
         numSatellitePlots: 12,
-        templatePrefix: "satellite-grid-container-",
+        templatePrefix: 'satellite-grid-container-',
       },
       mainGraphIndex: 0,
     },
@@ -44,17 +44,7 @@ export const reducer = (state = initialState, action: fromActions.ActionsType): 
         },
       };
     case fromActions.RELOAD_MODE:
-      return {
-        ...state,
-        modes: {
-          ...state.modes,
-          [state.selectedMode]: {
-            ...state.modes[state.selectedMode],
-            graphItems: action.payload.graphItems,
-            mainGraphIndex: action.payload.mainGraphIndex,
-          },
-        },
-      };
+      return { ...state, modes: { ...state.modes, [state.selectedMode]: { ...state.modes[state.selectedMode], graphItems: action.payload.graphItems, mainGraphIndex: action.payload.mainGraphIndex } } };
     case fromActions.SET_ACTIVE_TOOL:
       return {
         ...state,

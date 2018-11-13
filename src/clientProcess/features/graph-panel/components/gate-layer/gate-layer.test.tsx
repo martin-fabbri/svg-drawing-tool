@@ -1,9 +1,9 @@
 import {shallow} from "enzyme";
 import * as React from "react";
+// import {GateType, IGateShape} from "../../interfaces";
+import Index, {GateLayer} from ".";
 import {ParameterAxis} from "../../../../reduxStateMgt/types";
 import {GraphPanelTools} from "../../constants";
-// import {GateType, IGateShape} from "../../interfaces";
-import Index, {GateLayer} from "./index";
 
 // const singularGate: IGateShape[] = [
 //   {

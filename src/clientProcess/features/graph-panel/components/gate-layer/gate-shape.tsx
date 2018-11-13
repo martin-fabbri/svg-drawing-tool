@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from "src/styled-components";
 import { GateType, IGateShape } from "../../interfaces";
 
 export enum SelectionType {

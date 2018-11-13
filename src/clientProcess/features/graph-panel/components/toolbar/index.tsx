@@ -1,6 +1,6 @@
 import { Alignment, ButtonGroup, Navbar, NavbarGroup } from "@blueprintjs/core";
 import * as React from "react";
-import styled from "styled-components";
+import styled from "src/styled-components";
 import { GraphPanelTools } from "../../constants";
 import { IGraphPanelContext, withGraphPanelContext } from "../../duck/context";
 import ToolbarOption from "./tool-option";

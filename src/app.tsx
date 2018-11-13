@@ -1,8 +1,8 @@
 import * as React from "react";
-import GateLayer from "./features/graph-panel/components/gate-layer";
-import Toolbar from "./features/graph-panel/components/toolbar";
-import { GraphPanelTools } from "./features/graph-panel/constants";
-import GraphPanelContext from "./features/graph-panel/duck/context";
+import GateLayer from "./clientProcess/features/graph-panel/components/gate-layer";
+import Toolbar from "./clientProcess/features/graph-panel/components/toolbar";
+import { GraphPanelTools } from "./clientProcess/features/graph-panel/constants";
+import GraphPanelContext from "./clientProcess/features/graph-panel/duck/context";
 import styled from "./styled-components";
 
 // import {connect} from 'react-redux';

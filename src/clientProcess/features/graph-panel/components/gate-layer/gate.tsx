@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "src/styled-components";
 import { IGateShape } from "../../interfaces";
 import { getGateShape } from "./gate-shape";
 
